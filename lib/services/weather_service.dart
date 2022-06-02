@@ -7,9 +7,14 @@ String appId = "71f5d5afc9b2c06145fcd1fc6a45a62a";
 Future<WeatherReport> getCurrentWeather(String city) async {
   List<Weather> listWeather = [];
 
-  if (city.isEmpty) return WeatherReport(listWeather, Main("", 0), Wind(0));
+  if (city.isEmpty) return WeatherReport(listWeather, Main("", ""), Wind(""));
 
-  final queryParameters = {'q': city, 'appid': appId};
+  final queryParameters = {
+    "q": city,
+    "appid": appId,
+    "units": "metric",
+    "lang": "FR"
+  };
 
   var url =
       Uri.https("api.openweathermap.org", "/data/2.5/weather", queryParameters);
@@ -21,13 +26,13 @@ Future<WeatherReport> getCurrentWeather(String city) async {
       Weather weather = Weather(data["main"], data["icon"]);
       listWeather.add(weather);
     }
-    Main main = Main(
-        "${jsonResponse["main"]["temp"]}°", jsonResponse["main"]["humidity"]);
-    Wind wind = Wind(jsonResponse["wind"]["speed"]);
+    Main main = Main("${jsonResponse["main"]["temp"]}°",
+        "${jsonResponse["main"]["humidity"]} %");
+    Wind wind = Wind("${jsonResponse["wind"]["speed"]} km/h");
     return WeatherReport(listWeather, main, wind);
   } else {
     // ignore: avoid_print
     print('Request failed with status: ${response.statusCode}.');
   }
-  return WeatherReport(listWeather, Main("", 0), Wind(0));
+  return WeatherReport(listWeather, Main("", ""), Wind(""));
 }

@@ -15,13 +15,13 @@ class Weather {
 
 class Main {
   String temp;
-  int humidity;
+  String humidity;
 
   Main(this.temp, this.humidity);
 }
 
 class Wind {
-  double speed;
+  String speed;
 
   Wind(this.speed);
 }
