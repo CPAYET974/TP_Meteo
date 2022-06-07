@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget today(BuildContext context) {
+Widget tomorrow(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(26, 13, 26, 0),
     child: Column(
@@ -13,7 +13,7 @@ Widget today(BuildContext context) {
           style: TextStyle(fontSize: 17.5),
         ),
         const SizedBox(
-          height: 26,
+          height: 20,
         ),
         Row(
           children: const [
@@ -37,33 +37,10 @@ Widget today(BuildContext context) {
             ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text(
-              "26°",
-              style: TextStyle(fontSize: 70, color: Colors.white),
-            ),
-            Icon(
-              Icons.cloud,
-              size: 70,
-              color: Colors.white,
-            ),
-          ],
+        const Text(
+          "Averses",
+          style: TextStyle(fontSize: 30, color: Colors.white),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text(
-              "Température ressentie : 27°",
-              style: TextStyle(fontSize: 15, color: Colors.white),
-            ),
-            Text(
-              "Nuageux",
-              style: TextStyle(fontSize: 15, color: Colors.white),
-            ),
-          ],
-        )
       ],
     ),
   );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tp_weather/today.dart';
+import 'package:tp_weather/tomorrow.dart';
 
 void main() {
   runApp(const MyApp());
@@ -77,6 +77,6 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         backgroundColor: Colors.blue,
-        body: today(context));
+        body: tomorrow(context));
   }
 }
