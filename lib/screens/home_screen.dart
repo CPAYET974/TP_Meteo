@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_const
 
 import 'package:flutter/material.dart';
+import 'package:tp_weather/screens/templates/navigation_drawer.dart';
 
 class CurrentWeather extends StatefulWidget {
   const CurrentWeather({Key? key}) : super(key: key);
@@ -38,15 +39,13 @@ class Foreground extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black54,
       appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          iconTheme: const IconThemeData(color: Colors.white),
-          leading: IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {},
-          ),
-          centerTitle: true,
-          title: const Text('Paris')),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.white),
+        centerTitle: true,
+        title: const Text('Paris'),
+      ),
+      drawer: const NavigationDrawer(),
       body: Column(
         children: <Widget>[
           SizedBox(
@@ -155,8 +154,7 @@ class Foreground extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          SizedBox(
-            height: 300,
+          Expanded(
             child: ListView(
               scrollDirection: Axis.vertical,
               children: const <Widget>[
