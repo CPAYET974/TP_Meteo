@@ -1,7 +1,7 @@
-// ignore_for_file: unnecessary_const
-
 import 'package:flutter/material.dart';
+import 'package:tp_weather/models/location_model.dart';
 import 'package:tp_weather/screens/templates/navigation_drawer.dart';
+import 'package:tp_weather/services/database/database.dart';
 
 class CurrentWeather extends StatefulWidget {
   const CurrentWeather({Key? key}) : super(key: key);
@@ -11,6 +11,29 @@ class CurrentWeather extends StatefulWidget {
 }
 
 class _CurrentWeatherState extends State<CurrentWeather> {
+  bool isLoading = false;
+  late List<Location> locationsList;
+  @override
+  void initState() {
+    super.initState();
+
+    refreshLocations();
+  }
+
+  @override
+  void dispose() {
+    LocationsDatabase.instance.close();
+    super.dispose();
+  }
+
+  Future refreshLocations() async {
+    setState(() => isLoading = true);
+
+    locationsList = await LocationsDatabase.instance.read();
+
+    setState(() => isLoading = false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -25,7 +48,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
             ),
           ),
         ),
-        const Foreground()
+        const Foreground(),
       ],
     );
   }
@@ -45,7 +68,7 @@ class Foreground extends StatelessWidget {
         centerTitle: true,
         title: const Text('Paris'),
       ),
-      drawer: const NavigationDrawer(),
+      drawer: NavigationDrawer(),
       body: Column(
         children: <Widget>[
           SizedBox(

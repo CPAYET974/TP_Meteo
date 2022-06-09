@@ -4,14 +4,13 @@ import 'package:tp_weather/models/location_model.dart';
 
 class LocationsDatabase {
   static final LocationsDatabase instance = LocationsDatabase._init();
-
   static Database? _database;
+
   LocationsDatabase._init();
 
-  Future<Database> get database async {
-    if (_database == null) return _database!;
-    _database = await _initDB(tableName);
-    return _database!;
+  Future<Database?> get database async {
+    _database ??= await _initDB(tableName);
+    return _database;
   }
 
   Future<Database> _initDB(String filePath) async {
@@ -26,45 +25,36 @@ class LocationsDatabase {
         'CREATE TABLE $tableName(id INTEGER PRIMARY KEY AUTOINCREMENT, cityName TEXT)');
   }
 
-  Future<void> _insert(Location location) async {
+  Future<Location> create(tableName, location) async {
     final db = await instance.database;
 
-    final id = await db.insert(
-      tableName,
-      location.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    final id = await db!.insert(tableName, location.toJson());
+    return location.copy(id: id);
   }
 
-  Future<List<Location>> _read() async {
-    final db = await database;
+  Future<List<Location>> read() async {
+    final db = await instance.database;
 
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    // final orderBy = '${LocationFields.cityName} ASC';
 
-    return List.generate(
-      maps.length,
-      (i) {
-        return Location(
-          id: maps[i]['id'],
-          cityName: maps[i]['cityName'],
-        );
-      },
-    );
+    final result = await db!.query(tableName);
+
+    return result.map((json) => Location.fromJson(json)).toList();
   }
 
-  Future<void> _deleteLocation(String cityName) async {
+  Future<void> deleteLocation(String cityName) async {
     final db = await database;
 
-    await db.delete(
+    await db?.delete(
       tableName,
       where: 'cityName = ?',
       whereArgs: [cityName],
     );
   }
 
-  Future _close() async {
+  Future close() async {
     final db = await instance.database;
 
-    db.close();
+    db?.close();
   }
 }

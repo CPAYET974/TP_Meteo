@@ -1,20 +1,35 @@
 const String tableName = 'user_location_sqflite';
 
-class Location {
-  final int id;
-  final String cityName;
+class LocationFields {
+  static final List<String> values = [id, cityName];
 
-  const Location({
-    required this.id,
+  static const String id = 'id';
+  static const String cityName = 'cityName';
+}
+
+class Location {
+  final int? id;
+  late final String cityName;
+
+  Location({
+    this.id,
     required this.cityName,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'cityName': cityName,
-    };
-  }
+  Location copy({
+    int? id,
+    String? cityName,
+  }) =>
+      Location(id: id ?? this.id, cityName: cityName ?? this.cityName);
+
+  static Location fromJson(Map<String, Object?> json) => Location(
+        id: json[LocationFields.id] as int,
+        cityName: json[LocationFields.cityName] as String,
+      );
+
+  Map<String, Object> toJson() => {
+        LocationFields.cityName: cityName,
+      };
 
   @override
   String toString() {

@@ -4,6 +4,8 @@ import 'package:tp_weather/screens/splash_screen.dart';
 import 'screens/home_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
