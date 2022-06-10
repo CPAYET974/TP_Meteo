@@ -12,20 +12,19 @@ class NavigationDrawer extends StatefulWidget {
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
   TextEditingController locationController = TextEditingController();
-  List<Widget> locationList = <Widget>[];
 
   static Database? _database;
 
   getAllLocations() async {
     var locations = await LocationsDatabase.instance.read();
 
-    for (var element in locations) {
-      setState(() {
-        locationList.add(ListTile(
-          title: Text(element.cityName),
-        ));
-      });
-    }
+    // for (var element in locations) {
+    //   setState(() {
+    //     locationList.add(ListTile(
+    //       title: Text(element.cityName),
+    //     ));
+    //   });
+    // }
   }
 
   @override
@@ -61,19 +60,27 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
             ),
             SizedBox(
-              child: Padding(
-                padding: EdgeInsets.all(5),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  children: [
-                    Column(
-                      children: locationList,
-                    )
-                  ],
-                ),
-              ),
-            )
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: FutureBuilder<List<Location>>(
+                  future: LocationsDatabase.instance.read(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<Location>> snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            title: Text(snapshot.data![index].cityName),
+                          );
+                        },
+                      );
+                    } else {
+                      return const Text('No data avaible');
+                    }
+                  }),
+            ),
+            //
           ],
         ),
       ),
