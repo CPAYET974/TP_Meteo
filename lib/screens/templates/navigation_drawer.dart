@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:tp_weather/models/location_model.dart';
 import 'package:tp_weather/services/database/database.dart';
 
 class NavigationDrawer extends StatefulWidget {
-  NavigationDrawer({Key? key}) : super(key: key);
+  const NavigationDrawer({Key? key}) : super(key: key);
 
   @override
   State<NavigationDrawer> createState() => _NavigationDrawerState();
@@ -13,18 +12,9 @@ class NavigationDrawer extends StatefulWidget {
 class _NavigationDrawerState extends State<NavigationDrawer> {
   TextEditingController locationController = TextEditingController();
 
-  static Database? _database;
-
-  getAllLocations() async {
-    var locations = await LocationsDatabase.instance.read();
-
-    // for (var element in locations) {
-    //   setState(() {
-    //     locationList.add(ListTile(
-    //       title: Text(element.cityName),
-    //     ));
-    //   });
-    // }
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -63,24 +53,42 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: FutureBuilder<List<Location>>(
-                  future: LocationsDatabase.instance.read(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<Location>> snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            title: Text(snapshot.data![index].cityName),
-                          );
-                        },
-                      );
-                    } else {
-                      return const Text('No data avaible');
-                    }
-                  }),
+                future: LocationsDatabase.instance.read(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<Location>> snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          title: Center(
+                            child: TextButton(
+                              onPressed: () {
+                                print('API');
+                              },
+                              child: Text(
+                                snapshot.data![index].cityName,
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.clear, color: Colors.red),
+                            onPressed: () async {
+                              await LocationsDatabase.instance.deleteLocation(
+                                  snapshot.data![index].cityName);
+                              setState(() {});
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return const Text('No data avaible');
+                  }
+                },
+              ),
             ),
-            //
           ],
         ),
       ),
