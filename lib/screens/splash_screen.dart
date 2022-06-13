@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget {
       duration: 250,
       animationDuration: const Duration(seconds: 3),
       splashTransition: SplashTransition.rotationTransition,
-      nextScreen: const CurrentWeather(),
+      nextScreen: const HomePage(),
     );
   }
 }

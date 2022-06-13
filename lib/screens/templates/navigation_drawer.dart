@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tp_weather/models/location_model.dart';
+import 'package:tp_weather/screens/home_screen.dart';
 import 'package:tp_weather/services/database/database.dart';
+
+String getLocationFrom = "Paris";
 
 class NavigationDrawer extends StatefulWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -11,6 +14,7 @@ class NavigationDrawer extends StatefulWidget {
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
   TextEditingController locationController = TextEditingController();
+  Foreground home = Foreground();
 
   @override
   void initState() {
@@ -64,7 +68,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                           title: Center(
                             child: TextButton(
                               onPressed: () {
-                                print('API');
+                                setState(() {
+                                  getLocationFrom =
+                                      snapshot.data![index].cityName;
+                                });
                               },
                               child: Text(
                                 snapshot.data![index].cityName,
