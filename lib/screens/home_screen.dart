@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tp_weather/models/location_model.dart';
-import 'package:tp_weather/screens/templates/navigation_drawer.dart';
+import 'package:tp_weather/screens/widgets/navigation_drawer.dart';
 import 'package:tp_weather/services/database/database.dart';
-import 'package:tp_weather/services/weather.dart';
+import 'package:tp_weather/services/weather_api/weather.dart';
 
 import '../models/weather_report.dart';
 
