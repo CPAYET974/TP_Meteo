@@ -114,7 +114,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             decoration: const InputDecoration(hintText: 'City name...'),
             onSubmitted: (value) async {
               final oneLocation = Location(cityName: locationController.text);
-              await LocationsDatabase.instance.create(tableName, oneLocation);
+
+              if (locationController.text.isNotEmpty) {
+                await LocationsDatabase.instance.create(tableName, oneLocation);
+              }
             }
             // onSubmitted: VERIFIE NOM DE VILLE, STOCK EN BDD, ENVOIE API,
             ),
