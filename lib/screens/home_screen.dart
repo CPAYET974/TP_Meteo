@@ -69,6 +69,7 @@ class _ForegroundState extends State<Foreground> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black54,
       appBar: AppBar(
         elevation: 0,
@@ -91,7 +92,12 @@ class _ForegroundState extends State<Foreground> {
           ),
         ],
       ),
-      drawer: NavigationDrawer(),
+      drawer: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Colors.transparent.withOpacity(0.8),
+        ),
+        child: NavigationDrawer(),
+      ),
       body: FutureBuilder<CurrentWeather>(
         future: getCurrentWeather(getLocationFrom),
         builder: (context, snapshot) {

@@ -25,34 +25,18 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Colors.white,
+        color: Colors.transparent,
         child: ListView(
           children: <Widget>[
             SizedBox(
-              child: TextField(
-                controller: locationController,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.clear),
-                    onPressed: () {
-                      final location =
-                          Location(cityName: locationController.text);
-                    },
-                  ),
-                  hintText: 'Search...',
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-            SizedBox(
-              child: TextButton(
-                child: const Text('Ajouter une ville'),
-                onPressed: () {
-                  openDialog(context);
-                },
-              ),
-            ),
+                child: IconButton(
+              alignment: Alignment.topLeft,
+              icon: Icon(Icons.add),
+              color: Colors.white,
+              onPressed: () {
+                openDialog(context);
+              },
+            )),
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
@@ -71,11 +55,16 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                                 setState(() {
                                   getLocationFrom =
                                       snapshot.data![index].cityName;
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const HomePage()));
                                 });
                               },
                               child: Text(
                                 snapshot.data![index].cityName,
-                                style: const TextStyle(color: Colors.black),
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
                           ),
@@ -117,6 +106,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
 
             if (locationController.text.isNotEmpty) {
               await LocationsDatabase.instance.create(tableName, oneLocation);
+              Navigator.pop(context);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
