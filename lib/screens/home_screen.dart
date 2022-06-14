@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tp_weather/models/location_model.dart';
 import 'package:tp_weather/screens/templates/navigation_drawer.dart';
 import 'package:tp_weather/services/database/database.dart';
@@ -95,7 +96,13 @@ class _ForegroundState extends State<Foreground> {
         future: getCurrentWeather(getLocationFrom),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: Text("Chargement en cours..."));
+            return Center(
+              child: SpinKitDualRing(
+                color: Colors.white,
+                size: 40,
+                duration: Duration(milliseconds: 1200),
+              ),
+            );
           } else if (snapshot.connectionState == ConnectionState.done) {
             return Column(
               children: <Widget>[
@@ -180,8 +187,13 @@ class _ForegroundState extends State<Foreground> {
                         snapshot.data!.coord.lon, snapshot.data!.coord.lat),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(
-                            child: Text("Chargement en cours..."));
+                        return Center(
+                          child: SpinKitDualRing(
+                            color: Colors.white,
+                            size: 40,
+                            duration: Duration(milliseconds: 1200),
+                          ),
+                        );
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
                         return ListView.builder(
@@ -238,8 +250,13 @@ class _ForegroundState extends State<Foreground> {
                         snapshot.data!.coord.lon, snapshot.data!.coord.lat),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(
-                            child: Text("Chargement en cours..."));
+                        return Center(
+                          child: SpinKitDualRing(
+                            color: Colors.white,
+                            size: 40,
+                            duration: Duration(milliseconds: 1200),
+                          ),
+                        );
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
                         return ListView.builder(

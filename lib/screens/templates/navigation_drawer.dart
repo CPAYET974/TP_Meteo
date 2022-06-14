@@ -110,17 +110,27 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       builder: (context) => AlertDialog(
         title: const Text('Ajouter une ville :'),
         content: TextField(
-            controller: locationController,
-            decoration: const InputDecoration(hintText: 'City name...'),
-            onSubmitted: (value) async {
-              final oneLocation = Location(cityName: locationController.text);
+          controller: locationController,
+          decoration: const InputDecoration(hintText: 'City name...'),
+          onSubmitted: (value) async {
+            final oneLocation = Location(cityName: locationController.text);
 
-              if (locationController.text.isNotEmpty) {
-                await LocationsDatabase.instance.create(tableName, oneLocation);
-              }
+            if (locationController.text.isNotEmpty) {
+              await LocationsDatabase.instance.create(tableName, oneLocation);
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    'Enter an existing city name',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  duration: Duration(seconds: 3),
+                ),
+              );
             }
             // onSubmitted: VERIFIE NOM DE VILLE, STOCK EN BDD, ENVOIE API,
-            ),
+          },
+        ),
         actions: [
           TextButton(
             onPressed: () {
