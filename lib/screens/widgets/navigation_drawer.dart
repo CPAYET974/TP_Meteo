@@ -14,7 +14,6 @@ class NavigationDrawer extends StatefulWidget {
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
   TextEditingController locationController = TextEditingController();
-  Foreground home = Foreground();
 
   @override
   void initState() {
@@ -29,14 +28,15 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         child: ListView(
           children: <Widget>[
             SizedBox(
-                child: IconButton(
-              alignment: Alignment.topLeft,
-              icon: Icon(Icons.add),
-              color: Colors.white,
-              onPressed: () {
-                openDialog(context);
-              },
-            )),
+              child: IconButton(
+                alignment: Alignment.topLeft,
+                icon: Icon(Icons.add),
+                color: Colors.white,
+                onPressed: () {
+                  openDialog(context);
+                },
+              ),
+            ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
