@@ -1,16 +1,42 @@
-# tp_weather
+# TP Weather APP
 
-TP mobile
+Langage code : Flutter
+Compability : IOS && ANDROID
+IDE : Visual Studio Code
+Use Database : yes
+Use API : yes
+APK : yes
+IPA : no
+
+## Team Members
+
+3 members :
+
+- DIETRICH Thomas : [Github](https://github.com/Kierha)
+- PAYET Cédric : [Github](https://github.com/CPAYET974)
+- VITTE Robin : [Github](https://github.com/robinhio)
+
+## Project Context
+
+[[2ND YEARS INFO]]
+This project has been realized during the mobile developpment module.
+By using the free version of the [Weather API](https://openweathermap.org/api), we have created a simple weather app.
+In this app, you can find weather details up for 10 days.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Be sure you have installed :
 
-A few resources to get you started if this is your first Flutter project:
+- Dart
+- Flutter
+- Android Studio
+- Android Emulator
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+To start project in Production Mode :
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. flutter pub get
+2. flutter run
+
+## APK
+
+Incoming...
