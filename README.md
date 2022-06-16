@@ -6,11 +6,11 @@ IDE : Visual Studio Code
 Use Database : yes  
 Use API : yes  
 APK : yes  
-IPA : no  
+IPA : no
 
 ## Team Members
 
-3 members :  
+3 members :
 
 - DIETRICH Thomas : [Github](https://github.com/Kierha)
 - PAYET Cédric : [Github](https://github.com/CPAYET974)
@@ -25,18 +25,19 @@ In this app, you can find weather details up for 10 days.
 
 ## Getting Started
 
-Be sure you have installed :  
+Be sure you have installed :
 
 - Dart
 - Flutter
 - Android Studio
 - Android Emulator
 
-To start project in Production Mode :  
+To start project in Production Mode :
 
 1. flutter pub get
 2. flutter run
 
 ## APK
 
-Incoming...
+To generate an APK link for our app, we used the following command : _flutter build apk --build-name=1.0 --build-number=1_
+Here you can download it : [lib\app-release.apk]
