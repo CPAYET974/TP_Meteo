@@ -39,5 +39,5 @@ To start project in Production Mode :
 
 ## APK
 
-To generate an APK link for our app, we used the following command : _flutter build apk --build-name=1.0 --build-number=1_
-Here you can download it : <a href="app-release.apk" download>Click to Download</a>
+To generate an APK link for our app, we used the following command : _flutter build apk --build-name=1.0 --build-number=1_  
+You can find download the APK file to install it on your phone.
