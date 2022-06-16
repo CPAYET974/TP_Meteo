@@ -41,3 +41,7 @@ To start project in Production Mode :
 
 To generate an APK link for our app, we used the following command : _flutter build apk --build-name=1.0 --build-number=1_  
 You can find download the APK file to install it on your phone.
+
+## Incoming
+
+Always generate the first view with Paris by default when launching the app.
