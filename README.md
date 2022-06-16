@@ -40,4 +40,4 @@ To start project in Production Mode :
 ## APK
 
 To generate an APK link for our app, we used the following command : _flutter build apk --build-name=1.0 --build-number=1_
-Here you can download it : [Weather App](lib\app-release.apk)
+Here you can download it : <a href="app-release.apk" download>Click to Download</a>
